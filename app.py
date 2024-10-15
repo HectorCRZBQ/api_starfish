@@ -9,8 +9,10 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db = SQLAlchemy(app)
 
-# Definición del modelo para la estrella de mar con características adicionales
 class Starfish(db.Model):
+    """
+    Modelo de datos para una estrella de mar, con atributos adicionales como hábitat.
+    """
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(80), nullable=False)
     color = db.Column(db.String(50), nullable=False)
@@ -19,9 +21,12 @@ class Starfish(db.Model):
     age = db.Column(db.Integer, nullable=False)
     gender = db.Column(db.String(10), nullable=False)
     latin_name = db.Column(db.String(80), nullable=False)
-    habitat = db.Column(db.String(120), nullable=False)  # Atributo adicional
+    habitat = db.Column(db.String(120), nullable=False)
 
     def to_dict(self):
+        """
+        Convierte el objeto Starfish a un diccionario.
+        """
         return {
             'id': self.id,  
             'name': self.name,
@@ -38,11 +43,12 @@ class Starfish(db.Model):
 with app.app_context():
     db.create_all()
 
-# Ruta para crear una nueva estrella de mar (CREATE)
 @app.route('/starfish', methods=['POST'])
 def crear_starfish():
+    """
+    Crea una nueva entrada de estrella de mar.
+    """
     data = request.json
-    # Validación de campos requeridos
     required_fields = ['name', 'color', 'limbs', 'depth', 'age', 'gender', 'latin_name', 'habitat']
     for field in required_fields:
         if field not in data:
@@ -62,25 +68,30 @@ def crear_starfish():
     db.session.commit()
     return jsonify(nueva_starfish.to_dict()), 201
 
-# Ruta para obtener todas las estrellas de mar (READ)
 @app.route('/starfish', methods=['GET'])
 def obtener_starfish():
+    """
+    Obtiene una lista de todas las estrellas de mar.
+    """
     starfish_list = Starfish.query.all()
     return jsonify([s.to_dict() for s in starfish_list]), 200
 
-# Ruta para obtener una estrella de mar específica por ID (READ)
-@app.route('/starfish/<int:id>', methods=['GET'])
-def obtener_starfish_por_id(id):
-    starfish = Starfish.query.get_or_404(id)
+@app.route('/starfish/<int:starfish_id>', methods=['GET'])
+def obtener_starfish_por_id(starfish_id):
+    """
+    Obtiene una estrella de mar específica por ID.
+    """
+    starfish = Starfish.query.get_or_404(starfish_id)
     return jsonify(starfish.to_dict()), 200
 
-# Ruta para actualizar una estrella de mar (UPDATE)
-@app.route('/starfish/<int:id>', methods=['PUT'])
-def actualizar_starfish(id):
+@app.route('/starfish/<int:starfish_id>', methods=['PUT'])
+def actualizar_starfish(starfish_id):
+    """
+    Actualiza una estrella de mar existente.
+    """
     data = request.json
-    starfish = Starfish.query.get_or_404(id)
+    starfish = Starfish.query.get_or_404(starfish_id)
 
-    # Validación de datos
     if 'limbs' in data and data['limbs'] < 0:
         return jsonify({"error": "El número de extremidades no puede ser negativo."}), 400
 
@@ -96,14 +107,15 @@ def actualizar_starfish(id):
     db.session.commit()
     return jsonify(starfish.to_dict()), 200
 
-# Ruta para eliminar una estrella de mar (DELETE)
-@app.route('/starfish/<int:id>', methods=['DELETE'])
-def eliminar_starfish(id):
-    starfish = Starfish.query.get_or_404(id)
+@app.route('/starfish/<int:starfish_id>', methods=['DELETE'])
+def eliminar_starfish(starfish_id):
+    """
+    Elimina una estrella de mar por su ID.
+    """
+    starfish = Starfish.query.get_or_404(starfish_id)
     db.session.delete(starfish)
     db.session.commit()
-    return jsonify({"mensaje": f"La estrella de mar con ID {id} ha sido eliminada."}), 200
+    return jsonify({"mensaje": f"La estrella de mar con ID {starfish_id} ha sido eliminada."}), 200
 
-# Correr la aplicación
 if __name__ == '__main__':
     app.run(debug=True)

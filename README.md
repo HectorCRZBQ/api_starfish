@@ -100,4 +100,72 @@ Para ejecutar el archivo Makefile solo ejecutamos el comando **make all**.
 ![alt text](/images/image17.png)
 ![alt text](/images/image18.png)
 
+
+## Incorporamos un linter (pylint)
+
+Instalamos **pylint** con el comando **pip install pylint**
+
+![alt text](/images/image20.png)
+
+Ejecutamos el comando **pylint *.py** dentro del directorio de la API.
+
+**Primera ejecuccion**
+![alt text](/images/image21.png)
+
+**Segunda ejecuccion**
+ - Docstring de nivel de cada modulo de app.py
+ - Advertencia de pocas funciones publicas
+
+![alt text](/images/image22.png)
+
+**Tercera ejecuccion**
+ - Docstring explicativo a init_db.py
+
+![alt text](/images/image23.png)
+
+## Incorporamos coverage
+
+Instalamos **coverage** con el comando **pip install coverage**
+
+![alt text](/images/image24.png)
+
+Ejecutamos el comando **make setup** para instalar la dependencias y luego **make test** para realizar la prueba de cobertura.
+
+![alt text](/images/image25.png)
+
+Accedemos a navegador para visualizar el reporte que se nos ha generado con el comando **open htmlcov/index.html**
+
+![alt text](/images/image26.png)
+
+
+## Incorporamos trivy
+
+Instalamos **trivy** con el comando **sudo apt-get install -y wget && wget https://github.com/aquasecurity/trivy/releases/download/v0.46.0/trivy_0.46.0_Linux-64bit.deb && sudo dpkg -i trivy_0.46.0_Linux-64bit.deb**
+
+![alt text](/images/image27.png)
+![alt text](/images/image28.png)
+
+Ejecutamos el comando **make trivy** para realizar un escaneo de vulnerabilidades.
+
+![alt text](/images/image29.png)
+![alt text](/images/image30.png)
+
+
+## Automatizacion de mejoras incorporadas
+
+Ejecutamos el comando **make lint** para realizar una envaluacion de la calidad del codigo de manera automatizada del app.py y todos los tests.
+
+![alt text](/images/image31.png)
+
+Ejecutamos el comando **make coverage** para realizar un reporte del código.
+
+![alt text](/images/image32.png)
+
+Ejecutamos el comando **make trivy** para buscar vulnerabilidades de seguridad.
+
+![alt text](/images/image33.png)
+
+Aunqeu se puede 
+
+
 ### **Autor**: [HectorCRZBQ](https://github.com/HectorCRZBQ) 

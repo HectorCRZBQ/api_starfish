@@ -1,0 +1,58 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.db
+
+# Entornos virtuales
+env/
+venv/
+*.egg-info/
+*.egg
+.venv/
+
+# Archivos de configuración
+instance/
+*.sqlite3
+
+# Archivos generados
+.coverage
+*.log
+*.pot
+*.pyc
+*.pyd
+*.pyo
+*.db
+
+# Archivos de caché de pytest
+.pytest_cache/
+.coverage
+
+# Archivos de sistemas operativos
+.DS_Store
+Thumbs.db
+
+# IDEs y editores
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+*.sublime-settings
+
+# Archivos temporales
+*~
+*.swp
+*.swo
+*.bak
+
+# Archivos específicos de distribución
+dist/
+build/
+*.egg-info/
+
+# Archivos de configuración de herramientas
+.tool-versions
+
+# Archivos de imágenes
+images/

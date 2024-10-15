@@ -16,8 +16,17 @@ https://chatgpt.com/share/6709479d-c100-8007-985d-b702307b2947
 **Propmt de test seguridad (test_5.py)**:
 https://chatgpt.com/share/67095664-796c-8007-b986-b71fda00b49f
 
-**Todas los tests en un solo comando**
+**Todas los tests en un solo comando**:
 https://chatgpt.com/share/67099274-b0cc-8007-881a-1e95d5f59a88
 
-**Automatizarlo con un archivo Makefile**
+**Automatizarlo con un archivo Makefile**:
 https://chatgpt.com/share/6709abe1-0c74-8007-8f81-eb698f6d07c9
+
+**Linter de pylint**:
+https://chatgpt.com/share/670cf4cd-0834-8007-a428-db47ccaf16d5
+
+**Instalar coverage**
+https://chatgpt.com/share/670d03d4-ed24-8007-9dce-6384d5f0dead
+
+**Instalar trivy**
+https://chatgpt.com/share/670d0884-5c8c-8007-8782-c67b2238f35c

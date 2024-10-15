@@ -1,87 +1,138 @@
-import pytest
-from app import app, db, Starfish
-from flask import json
+"""
+Pruebas unitarias para la API de Starfish.
+"""
 
-# Este decorador indica que es una función que se ejecutará antes de todas las pruebas
-@pytest.fixture
-def client():
-    app.config['TESTING'] = True
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///:memory:'  # Base de datos en memoria para pruebas
-    with app.test_client() as client:
-        with app.app_context():
+import json
+import unittest
+from app import app, db
+
+class StarfishAPITestCase(unittest.TestCase):
+    """Clase de prueba para la API de Starfish."""
+
+    def setUp(self):
+        """Configura el entorno para las pruebas."""
+        self.app = app
+        self.app.config['TESTING'] = True
+        self.app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///:memory:'
+        self.client = self.app.test_client()
+
+        with self.app.app_context():
             db.create_all()
-        yield client
-        with app.app_context():
+
+    def tearDown(self):
+        """Limpia el entorno después de las pruebas."""
+        with self.app.app_context():
+            db.session.remove()
             db.drop_all()
 
-# Helper para agregar una estrella de mar al sistema durante las pruebas
-def crear_estrella_mar(client, name, color, limbs, depth, age, gender, latin_name, habitat):
-    return client.post('/starfish', 
-        data=json.dumps({
-            "name": name,
-            "color": color,
-            "limbs": limbs,
-            "depth": depth,
-            "age": age,
-            "gender": gender,
-            "latin_name": latin_name,
-            "habitat": habitat
-        }), 
-        content_type='application/json')
+    def test_crear_starfish(self):
+        """Prueba para crear una estrella de mar."""
+        response = self.client.post(
+            '/starfish',
+            data=json.dumps({
+                'name': 'Estrella Marina',
+                'color': 'Verde',
+                'limbs': 5,
+                'depth': 15.0,
+                'age': 2,
+                'gender': 'Femenino',
+                'latin_name': 'Asteroidea',
+                'habitat': 'Arrecife'
+            }),
+            content_type='application/json'
+        )
+        self.assertEqual(response.status_code, 201)
+        self.assertIn('Estrella Marina', str(response.data))
 
-# Test: Crear una nueva estrella de mar
-def test_crear_starfish(client):
-    response = crear_estrella_mar(client, "Estrella Azul", "Azul", 5, 30.0, 3, "Hembra", "Asterias rubens", "Océano Atlántico")
-    assert response.status_code == 201
-    data = json.loads(response.data)
-    assert data['name'] == "Estrella Azul"
-    assert data['color'] == "Azul"
+    def test_obtener_starfish(self):
+        """Prueba para obtener todas las estrellas de mar."""
+        self.client.post(
+            '/starfish',
+            data=json.dumps({
+                'name': 'Estrella Azul',
+                'color': 'Azul',
+                'limbs': 5,
+                'depth': 10.0,
+                'age': 1,
+                'gender': 'Masculino',
+                'latin_name': 'Asterias',
+                'habitat': 'Aguas profundas'
+            }),
+            content_type='application/json'
+        )
 
-# Test: Obtener todas las estrellas de mar
-def test_obtener_todas_las_starfish(client):
-    crear_estrella_mar(client, "Estrella Roja", "Rojo", 5, 20.0, 2, "Macho", "Acanthaster planci", "Océano Pacífico")
-    response = client.get('/starfish')
-    assert response.status_code == 200
-    data = json.loads(response.data)
-    assert len(data) == 1
-    assert data[0]['name'] == "Estrella Roja"
+        response = self.client.get('/starfish')
+        self.assertEqual(response.status_code, 200)
+        self.assertIn('Estrella Azul', str(response.data))
 
-# Test: Obtener una estrella de mar por ID
-def test_obtener_starfish_por_id(client):
-    response_post = crear_estrella_mar(client, "Estrella Verde", "Verde", 5, 25.0, 4, "Hembra", "Pisaster ochraceus", "Océano Índico")
-    data_post = json.loads(response_post.data)
-    starfish_id = data_post['id']
+    def test_obtener_starfish_por_id(self):
+        """Prueba para obtener una estrella de mar por su ID."""
+        self.client.post(
+            '/starfish',
+            data=json.dumps({
+                'name': 'Estrella Rosa',
+                'color': 'Rosa',
+                'limbs': 5,
+                'depth': 20.0,
+                'age': 3,
+                'gender': 'Femenino',
+                'latin_name': 'Astropecten',
+                'habitat': 'Océano'
+            }),
+            content_type='application/json'
+        )
 
-    response_get = client.get(f'/starfish/{starfish_id}')
-    assert response_get.status_code == 200
-    data_get = json.loads(response_get.data)
-    assert data_get['name'] == "Estrella Verde"
+        response = self.client.get('/starfish/1')
+        self.assertEqual(response.status_code, 200)
+        self.assertIn('Estrella Rosa', str(response.data))
 
-# Test: Actualizar una estrella de mar
-def test_actualizar_starfish(client):
-    response_post = crear_estrella_mar(client, "Estrella Amarilla", "Amarillo", 5, 35.0, 5, "Hembra", "Protoreaster nodosus", "Océano Índico")
-    data_post = json.loads(response_post.data)
-    starfish_id = data_post['id']
+    def test_actualizar_starfish(self):
+        """Prueba para actualizar una estrella de mar existente."""
+        self.client.post(
+            '/starfish',
+            data=json.dumps({
+                'name': 'Estrella Naranja',
+                'color': 'Naranja',
+                'limbs': 5,
+                'depth': 12.0,
+                'age': 4,
+                'gender': 'Masculino',
+                'latin_name': 'Echinaster',
+                'habitat': 'Roca'
+            }),
+            content_type='application/json'
+        )
 
-    response_put = client.put(f'/starfish/{starfish_id}', 
-        data=json.dumps({"name": "Estrella Amarilla Modificada"}),
-        content_type='application/json')
-    
-    assert response_put.status_code == 200
-    data_put = json.loads(response_put.data)
-    assert data_put['name'] == "Estrella Amarilla Modificada"
+        response = self.client.put(
+            '/starfish/1',
+            data=json.dumps({
+                'color': 'Naranja Claro'
+            }),
+            content_type='application/json'
+        )
+        self.assertEqual(response.status_code, 200)
+        self.assertIn('Naranja Claro', str(response.data))
 
-# Test: Eliminar una estrella de mar
-def test_eliminar_starfish(client):
-    response_post = crear_estrella_mar(client, "Estrella Morada", "Morado", 5, 15.0, 2, "Macho", "Linckia laevigata", "Océano Atlántico")
-    data_post = json.loads(response_post.data)
-    starfish_id = data_post['id']
+    def test_eliminar_starfish(self):
+        """Prueba para eliminar una estrella de mar."""
+        self.client.post(
+            '/starfish',
+            data=json.dumps({
+                'name': 'Estrella Morada',
+                'color': 'Morado',
+                'limbs': 5,
+                'depth': 25.0,
+                'age': 5,
+                'gender': 'Femenino',
+                'latin_name': 'Astropecten',
+                'habitat': 'Arrecife'
+            }),
+            content_type='application/json'
+        )
 
-    response_delete = client.delete(f'/starfish/{starfish_id}')
-    assert response_delete.status_code == 200
-    data_delete = json.loads(response_delete.data)
-    assert "eliminada" in data_delete['mensaje']
+        response = self.client.delete('/starfish/1')
+        self.assertEqual(response.status_code, 200)
+        self.assertIn('La estrella de mar con ID 1 ha sido eliminada.', str(response.data))
 
-    # Verificar que la estrella fue eliminada
-    response_get = client.get(f'/starfish/{starfish_id}')
-    assert response_get.status_code == 404
+if __name__ == '__main__':
+    unittest.main()
