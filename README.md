@@ -165,7 +165,5 @@ Ejecutamos el comando **make trivy** para buscar vulnerabilidades de seguridad.
 
 ![alt text](/images/image33.png)
 
-Aunqeu se puede 
-
 
 ### **Autor**: [HectorCRZBQ](https://github.com/HectorCRZBQ) 
