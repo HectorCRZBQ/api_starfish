@@ -155,15 +155,77 @@ Ejecutamos el comando **make trivy** para realizar un escaneo de vulnerabilidade
 
 Ejecutamos el comando **make lint** para realizar una envaluacion de la calidad del codigo de manera automatizada del app.py y todos los tests.
 
-![alt text](/images/image31.png)
+![alt text](/images2/image31.png)
 
 Ejecutamos el comando **make coverage** para realizar un reporte del código.
 
-![alt text](/images/image32.png)
+![alt text](/images2/image32.png)
 
 Ejecutamos el comando **make trivy** para buscar vulnerabilidades de seguridad.
 
-![alt text](/images/image33.png)
+![alt text](/images2/image33.png)
+
+
+## Incorporamos dotenv (configuracion)
+
+Creamos **.env** con el comando **touch .env** y lo modificamos con **nano**  donde añadimos las variables de configuración.
+
+![alt text](/images2/image34.png)
+
+Para cargar las varisable en la aplicación usamos **dotenv** que istalamos con el comando **pip install python-dotenv**.
+
+![alt text](/images2/image35.png)
+
+Creamos el archivo **secrets.yaml** con el comando **touch secrets.yaml** y lo modificamos con **nano** donde guardamos un usuario y una contraseña(falsas) que son datos sensibles.
+
+![alt text](/images2/image36.png)
+
+Añadimos este archivo dentro de .gitignore para que no se comparta.
+
+
+## Incorporamos SOPS y PGP (secretos)
+
+Descargamos [SOPS](https://github.com/getsops/sops/releases).
+
+En este caso seguimos los siguientes comandos:
+
+ - **Descargar el binario de la versión 3.9.1**: curl -LO https://github.com/getsops/sops/releases/download/v3.9.1/sops-v3.9.1.linux.amd64
+ - **Mover el binario al directorio /usr/local/bin**: sudo mv sops-v3.9.1.linux.amd64 /usr/local/bin/sops
+ - **Hacer que el binario sea ejecutable**: sudo chmod +x /usr/local/bin/sops
+ - **Verificar la instalacion**: sops --version
+
+![alt text](/images2/image37.png)
+
+Una vez descargada la imagen, ejecutamos el comando **gpg --import sops_functional_tests_key.asc** para importar la clave descargada.
+
+![alt text](/images2/image38.png)
+
+Ciframos el archivo secrets.yaml con el comando **sops --encrypt --pgp FBC7B9E2A4F9289AC0C1D4843D16CEE4A27381B4 secrets.yaml > secrets.enc.yaml** y se nos actualiza el nombre **secrets.enc.yaml**
+
+![alt text](/images2/image39.png)
+
+Revisamos el contenido del archivo **secrets.enc.yaml** para verificar que se ha encriptado correctamente las claves.
+
+![alt text](/images2/image40.png)
+
+Y para desencriptarlo necesitariamos ejecutar el comando **sops --decrypt secrets.enc.yaml > secrets.yaml**
+
+![alt text](/images2/image41.png)
+
+
+## Automatizacion de mejoras incorporadas
+
+Ejecutamos el comando **make encrypt** para cifrar el archivo secrets.yaml usando SOPS y PGP, convirtiendolo en el secrets.enc.yaml
+
+![alt text](/images2/image42.png)
+
+Ejecutamos el comando **make decrypt** para descifrar el archivo secrets.enc.yaml y lo muestra de nuevo en el archivo secrets.yaml
+
+![alt text](/images2/image43.png)
+
+Al ejecutar el **make all** observamos que tambien se ejecuta el encrypt y decrypt de manera automarizada.
+
+![alt text](/images2/image44.png)
 
 
 ### **Autor**: [HectorCRZBQ](https://github.com/HectorCRZBQ) 

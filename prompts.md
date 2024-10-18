@@ -30,3 +30,6 @@ https://chatgpt.com/share/670d03d4-ed24-8007-9dce-6384d5f0dead
 
 **Instalar trivy**
 https://chatgpt.com/share/670d0884-5c8c-8007-8782-c67b2238f35c
+
+**Gestionar y configurar los secretos**
+https://chatgpt.com/share/67124921-4e40-8007-b4d3-350fa2ffb6e6

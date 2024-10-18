@@ -54,5 +54,5 @@ build/
 # Archivos de configuración de herramientas
 .tool-versions
 
-# Archivos de imágenes
-images/
+# Archivos secretos
+secrets.yaml
