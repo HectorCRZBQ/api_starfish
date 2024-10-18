@@ -3,6 +3,7 @@
 ## Estructura del proyecto
 
 ![image](/images/image19.png)
+
 *Se uso la libreria tree (sudo apt-get install tree), en concreto el comando tree -a -L 2*.
 
 ## Funcionamiento automatizado
