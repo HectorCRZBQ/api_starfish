@@ -333,19 +333,9 @@ Revisamos las versiones presentes de **node** y de **npm** con los comandos de *
 
 *Si dan error puede deberse a que asdf este desactualizado y no contenga nodejs por lo que ejecutamos el comando **asdf plugin-add nodejs***.
 
-Instalamos Projen ejecutando el comando **npm install -g projen**
+Instalamos Projen ejecutando el comando **npx projen new typescript-app**
 
- ![alt text](/images3/image64.png)
-
-Revisamos que tenemos los archivos **pyproject.toml** y **poetry.lock** que hemos creado anteriormente
-
- ![alt text](/images3/image65.png)
-
-Dentro ejecutamos el comando **projen new python** que nos genera el archivo 
-
- ![alt text](/images3/image66.png)
-
- ![alt text](/images3/image67.png)
+ ![alt text](/images3/image64.png))
 
 
 
