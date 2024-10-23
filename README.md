@@ -333,15 +333,29 @@ Revisamos las versiones presentes de **node** y de **npm** con los comandos de *
 
 *Si dan error puede deberse a que asdf este desactualizado y no contenga nodejs por lo que ejecutamos el comando **asdf plugin-add nodejs***.
 
-Instalamos Projen ejecutando el comando **npx projen new typescript-app**
+Instalamos Projen ejecutando el comando **npx projen new python**
 
  ![alt text](/images3/image64.png))
 
+ ![alt text](/images3/image65.png))
 
+Las dependencias se han instalado con yarn, si no se tiene yarn instalado ejecutar el comando **npm install --global yarn**, y se genera el archivo **yarn.lock**.
 
+ ![alt text](/images3/image66.png))
+
+ Ademas de ello se nos han creado los siguientes archivos:
+
+  - .projenrc.ts: archivo de configuración para Projen.
+  - package.json: archivo de configuración de NPM que lista las dependencias del proyecto.
+  - tsconfig.json y tsconfig.dev.json: archivos de configuración de TypeScript
+  - .eslintrc.json: rchivos de configuración de ESLint
 
 
 Se nos crea el archivo **.projenrc.js** donde guardamos nuestras dependencias.
+
+ ![alt text](/images3/image67.png))
+
+
 
 Instalamos las dependencias y configuramos el proyecto con el comando **npx projen**
 
