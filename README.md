@@ -341,7 +341,14 @@ Revisamos que tenemos los archivos **pyproject.toml** y **poetry.lock** que hemo
 
  ![alt text](/images3/image65.png)
 
-Dentro ejecutamos el comando **projen new python** que nos genera los archivos ...
+Dentro ejecutamos el comando **projen new python** que nos genera el archivo 
+
+ ![alt text](/images3/image66.png)
+
+ ![alt text](/images3/image67.png)
+
+
+
 
 
 Se nos crea el archivo **.projenrc.js** donde guardamos nuestras dependencias.
