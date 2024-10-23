@@ -333,7 +333,7 @@ Revisamos las versiones presentes de **node** y de **npm** con los comandos de *
 
 *Si dan error puede deberse a que asdf este desactualizado y no contenga nodejs por lo que ejecutamos el comando **asdf plugin-add nodejs***.
 
-Instalamos Projen ejecutando el comando **npx projen new python**
+Instalamos Projen ejecutando el comando **npx projen new python**.
 
  ![alt text](/images3/image64.png))
 
@@ -350,14 +350,26 @@ Las dependencias se han instalado con yarn, si no se tiene yarn instalado ejecut
   - tsconfig.json y tsconfig.dev.json: archivos de configuración de TypeScript
   - .eslintrc.json: rchivos de configuración de ESLint
 
-
-Se nos crea el archivo **.projenrc.js** donde guardamos nuestras dependencias.
+Se nos crea el archivo **.projenrc.py** donde guardamos nuestras dependencias.
 
  ![alt text](/images3/image67.png))
 
+El archivo **.projenrc.py** de origen nos muestra los siguientes elementos.
 
+ ![alt text](/images3/image68.png))
 
-Instalamos las dependencias y configuramos el proyecto con el comando **npx projen**
+ Le incorporamos las tareas y las dependencias necesarias para que este completo.
 
+ ![alt text](/images3/image69.png))
+
+Ejecutamos el comando **npx projen**, que lee la configuración definida en **.projenrc.py** y genera los archivos **package.json** y **yarn.lock**.
+
+ ![alt text](/images3/image70.png))
+
+*ts-node es usado por projen para ejecutar el archivo .projenrc.ts, y con ello crea genera automaticamente los archivos de configuración necesarios que son package.json, tsconfig.json y más.*
+
+Ejecutamos el comando **ls -la** para revisar que se han creado los archivos **package.json**, **.projen** y **yarn.lock**.
+
+ ![alt text](/images3/image71.png))
 
 ### **Autor**: [HectorCRZBQ](https://github.com/HectorCRZBQ) 

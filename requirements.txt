@@ -1,0 +1,83 @@
+anaconda-anon-usage @ file:///croot/anaconda-anon-usage_1710965072196/work
+archspec @ file:///croot/archspec_1709217642129/work
+astroid==3.3.5
+attrs==24.2.0
+blinker==1.8.2
+boltons @ file:///work/perseverance-python-buildout/croot/boltons_1698851177130/work
+Brotli @ file:///croot/brotli-split_1714483155106/work
+cattrs==24.1.2
+certifi @ file:///croot/certifi_1720453481653/work/certifi
+cffi @ file:///croot/cffi_1714483155441/work
+charset-normalizer @ file:///croot/charset-normalizer_1721748349566/work
+click==8.1.7
+conda @ file:///croot/conda_1722004606466/work
+conda-content-trust @ file:///croot/conda-content-trust_1714483159009/work
+conda-libmamba-solver @ file:///croot/conda-libmamba-solver_1721662679737/work/src
+conda-package-handling @ file:///croot/conda-package-handling_1718138267740/work
+conda_package_streaming @ file:///croot/conda-package-streaming_1718136078615/work
+ConfigArgParse==1.7
+constructs==10.4.2
+coverage==7.3.1
+cryptography @ file:///croot/cryptography_1714660666131/work
+dill==0.3.9
+distro @ file:///croot/distro_1714488253808/work
+Flask==2.2.5
+Flask-Cors==5.0.0
+Flask-Login==0.6.3
+flask-marshmallow==1.2.1
+Flask-SQLAlchemy==3.1.1
+Flask-Testing==0.8.1
+frozendict @ file:///croot/frozendict_1713194832637/work
+gevent==24.10.2
+geventhttpclient==2.3.1
+greenlet==3.1.1
+idna @ file:///croot/idna_1714398848350/work
+importlib_resources==6.4.5
+iniconfig==2.0.0
+isort==5.13.2
+itsdangerous==2.2.0
+Jinja2==3.1.4
+jsii==1.104.0
+jsonpatch @ file:///croot/jsonpatch_1714483231291/work
+jsonpointer==2.1
+libmambapy @ file:///croot/mamba-split_1714483352891/work/libmambapy
+locust==2.31.8
+MarkupSafe==3.0.1
+marshmallow==3.22.0
+marshmallow-sqlalchemy==1.1.0
+mccabe==0.7.0
+menuinst @ file:///croot/menuinst_1723567589013/work
+msgpack==1.1.0
+packaging @ file:///croot/packaging_1720101850331/work
+platformdirs @ file:///work/perseverance-python-buildout/croot/platformdirs_1701732573265/work
+pluggy==1.5.0
+projen==0.88.6
+psutil==6.0.0
+publication==0.0.3
+py==1.11.0
+pycosat @ file:///croot/pycosat_1714510623388/work
+pycparser @ file:///tmp/build/80754af9/pycparser_1636541352034/work
+pylint==3.3.1
+PySocks @ file:///work/perseverance-python-buildout/croot/pysocks_1698845478203/work
+pytest==7.4.3
+pytest-flask==1.3.0
+python-dateutil==2.9.0.post0
+python-dotenv==1.0.1
+pyzmq==26.2.0
+requests @ file:///croot/requests_1721410876868/work
+ruamel.yaml @ file:///work/perseverance-python-buildout/croot/ruamel.yaml_1698863605521/work
+setuptools==75.2.0
+six==1.16.0
+SQLAlchemy==2.0.35
+tomli==2.0.2
+tomlkit==0.13.2
+tqdm @ file:///croot/tqdm_1716395931952/work
+truststore @ file:///work/perseverance-python-buildout/croot/truststore_1701735771625/work
+typeguard==2.13.3
+typing_extensions==4.12.2
+urllib3 @ file:///croot/urllib3_1718912636303/work
+Werkzeug==3.0.4
+wheel==0.44.0
+zope.event==5.0
+zope.interface==7.1.0
+zstandard @ file:///croot/zstandard_1714677652653/work
