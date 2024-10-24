@@ -141,7 +141,7 @@ Accedemos a navegador para visualizar el reporte que se nos ha generado con el c
 
 ## Incorporamos trivy
 
-Instalamos **trivy** con el comando **sudo apt-get install -y wget && wget https://github.com/aquasecurity/trivy/releases/download/v0.46.0/trivy_0.46.0_Linux-64bit.deb && sudo dpkg -i trivy_0.46.0_Linux-64bit.deb**
+Instalamos **trivy** con el comando **sudo apt-get install -y wget && wget https://github.com/aquasecurity/trivy/releases/download/v0.46.0/trivy_0.46.0_Linux-64bit.deb && sudo dpkg -i trivy_0.46.0_Linux-64bit.deb**.
 
 ![alt text](/images/image27.png)
 ![alt text](/images/image28.png)
@@ -228,5 +228,148 @@ Al ejecutar el **make all** observamos que tambien se ejecuta el encrypt y decry
 
 ![alt text](/images2/image44.png)
 
+
+## Integrar Poetry
+
+*Documentación oficial: https://python-poetry.org/docs/*
+
+Creamos una nueva rama **poetry** con el comando **git checkout -b poetry**.
+
+![alt text](/images2/image45.png)
+
+Necesitamos revisar que tenemos correctamente instalo **pipx**, sino se tiene instalado se puede ejecutar el comando **sudo apt install pipx** y incluimos su path con **pipx ensurepath**
+
+![alt text](/images2/image46.png)
+
+*Si se tienen problemas se puede acceder a la documentación oficial de pipx en https://pipx.pypa.io/stable/installation/*
+
+Instalamos Poetry ejecutando el comando **pipx install poetry**
+
+![alt text](/images2/image47.png)
+
+![alt text](/images2/image48.png)
+
+Actualizamos Poetry, que acabamos de descargar con el comando **pipx upgrade poetry**.
+
+![alt text](/images2/image49.png)
+
+Verificamos la version instalada de Poetry con el comando **poetry --version**.
+
+![alt text](/images2/image50.png)
+
+*Si no sale error de que no está instalado, es cuestión de reiniciar la terminal con el comnado **exec $SHELL** y volver a revisar la versio, ahora no va a mostrar ningun error.*
+
+Iniciamos Poetry con el comando **poetry init**
+
+Se nos va a pedir completar la configuración determinando el contenido de los siguientes campos:
+
+ - Project name: Nombre del proyecto, en este caso es **api-starfish**
+ - Version: Versión inicial por defecto, la version **0.1.0**
+ - Description: La descripción es **A API that makes the CRUD tasks about starfish**
+ - Author: Mi nombre que es **HectorCRZBQ** y mi correo que es **hectorcb3333@gmail.com**
+ - License: lo dejamos vacio sin una licencia definida
+ - Python version: La versión mínima de Python definida es **3.12**
+ - Dependencies: Seleccionamos **no** a dependencias interactivas
+ 
+ Y tras haber completado los anteriores campos se habria terminado de configurar de manera basica.
+
+ ![alt text](/images2/image51.png)
+
+ Al terminar este paso se no crea el archivo **pyproject.toml** con el contenido anteriormente definido, lo revisamos con el comando **cat pyproject.toml**.
+
+ ![alt text](/images2/image52.png)
+
+ ![alt text](/images2/image53.png)
+
+
+ Añadimos las dependencias de nuestro archivo **requirements.txt** con el comando **poetry add $(cat requirements.txt)**.
+
+ ![alt text](/images2/image54.png)
+
+*Vemos como se han cargado todas las dependencias declaradas en el archivo requirements.txt*
+
+Tras haber realizado la copia de las dependencias se ha creado el archivo **poetry.lock** y donde su contenido es el siguiente mostrado.
+
+ ![alt text](/images2/image55.png)
+
+ ![alt text](/images2/image56.png)
+
+Se nos ha actualizado el contenido de las dependencias del archivo **pyproject.toml**.
+
+ ![alt text](/images2/image57.png)
+
+Instalamos las dependencias con el comando **poetry install**
+
+ ![alt text](/images2/image58.png)
+
+*Optamos por el comando **poetry install --no-root** para no instalar el proyecto, solo instalar las dependencias necesarias.*
+
+*Documentacion oficial: https://python-poetry.org/docs/basic-usage/#initialising-a-pre-existing-project*
+
+Una vez que las dependencias estan descargadas, podemos acceder al entorno de trabajo con el comando **poetry shell**.
+
+ ![alt text](/images2/image59.png)
+
+Y para salir del entorno virtual solo nos queda ejecutar el comando **exit**
+
+ ![alt text](/images2/image60.png)
+
+
+## Integrar Projen
+
+*Documentación oficial: https://github.com/projen/projen*
+
+Creamos una nueva rama **projen** con el comando **git checkout -b projen**.
+
+ ![alt text](/images3/image61.png)
+
+Vamos a usar **npm**, por lo que vamos a añadir **nodejs 22.8.0** dentro de **.tool-versions**.
+
+ ![alt text](/images3/image62.png)
+
+Revisamos las versiones presentes de **node** y de **npm** con los comandos de **node --version** y de **npm --version**.
+
+ ![alt text](/images3/image63.png)
+
+*Si dan error puede deberse a que asdf este desactualizado y no contenga nodejs por lo que ejecutamos el comando **asdf plugin-add nodejs***.
+
+Instalamos Projen ejecutando el comando **npx projen new python**.
+
+ ![alt text](/images3/image64.png))
+
+ ![alt text](/images3/image65.png))
+
+Las dependencias se han instalado con yarn, si no se tiene yarn instalado ejecutar el comando **npm install --global yarn**, y se genera el archivo **yarn.lock**.
+
+ ![alt text](/images3/image66.png))
+
+ Ademas de ello se nos han creado los siguientes archivos:
+
+  - .projenrc.ts: archivo de configuración para Projen.
+  - package.json: archivo de configuración de NPM que lista las dependencias del proyecto.
+  - tsconfig.json y tsconfig.dev.json: archivos de configuración de TypeScript
+  - .eslintrc.json: rchivos de configuración de ESLint
+
+Se nos crea el archivo **.projenrc.py** donde guardamos nuestras dependencias.
+
+ ![alt text](/images3/image67.png))
+
+El archivo **.projenrc.py** de origen nos muestra los siguientes elementos.
+
+ ![alt text](/images3/image68.png))
+
+ Le incorporamos las tareas y las dependencias necesarias para que este completo.
+
+ ![alt text](/images3/image69.png))
+
+Ejecutamos el comando **npx projen**, que lee la configuración definida en **.projenrc.py** y genera los archivos **package.json** y **yarn.lock**.
+
+ ![alt text](/images3/image70.png))
+
+*ts-node es usado por projen para ejecutar el archivo .projenrc.ts, y con ello crea genera automaticamente los archivos de configuración necesarios que son package.json, tsconfig.json y más.*
+
+Ejecutamos el comando **ls -la** para revisar que se han creado los archivos **package.json**, **.projen** y **yarn.lock**.
+
+ ![alt text](/images3/image71.png))
 
 ### **Autor**: [HectorCRZBQ](https://github.com/HectorCRZBQ) 
