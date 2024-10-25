@@ -26,14 +26,14 @@ Una ventaja que tiene Poetry es que es muy facil de modificar el archivo *pyproj
 
   
 - **Projen**:
- - Mayor complejidad al ser necesariuo crear un archivo de configuración TypeScript, que es *.projenrc.ts*
- - Las modificaciones se realizan usando TypeScript siendo una estructura no muy común.
+  - Mayor complejidad al ser necesariuo crear un archivo de configuración TypeScript, que es *.projenrc.ts*
+  - Las modificaciones se realizan usando TypeScript siendo una estructura no muy común.
 
 **Conclusión**: 
 
- - Poetry es más amigable para proyectos *pequeños* y *medianos*.
+  - Poetry es más amigable para proyectos *pequeños* y *medianos*.
 
- - Projen es más adecuado para proyectos *grandes* con múltiples configuraciones que requieren automatización.
+  - Projen es más adecuado para proyectos *grandes* con múltiples configuraciones que requieren automatización.
 
 
 ## Flexibilidad y Modificación
@@ -48,9 +48,9 @@ Una ventaja que tiene Poetry es que es muy facil de modificar el archivo *pyproj
 
 **Conclusión**
 
- - Poetry ofrece una mayor flexibilidad para modificaciones rápidas y directas.
+  - Poetry ofrece una mayor flexibilidad para modificaciones rápidas y directas.
 
- - Projen asegura consistencia,pero en cambio obliga a que las modificaciones se realicen mediante el archivo de configuración *.projenrc.ts* y obliga la regeneración.
+  - Projen asegura consistencia,pero en cambio obliga a que las modificaciones se realicen mediante el archivo de configuración *.projenrc.ts* y obliga la regeneración.
 
 
 ## Esfuerzo de Configuración Inicial
@@ -65,9 +65,9 @@ Una ventaja que tiene Poetry es que es muy facil de modificar el archivo *pyproj
 
 **Conclusión**: 
 
- - Poetry es más sencillo y rápido de configurar.
+  - Poetry es más sencillo y rápido de configurar.
 
- - Projen requiere un mayor esfuerzo inicial, pero es más adecuado para configuraciones más complejas y automatizadas.
+  - Projen requiere un mayor esfuerzo inicial, pero es más adecuado para configuraciones más complejas y automatizadas.
 
 ## Automatización
 
@@ -81,9 +81,9 @@ Una ventaja que tiene Poetry es que es muy facil de modificar el archivo *pyproj
 
 **Conclusión**
 
- - Poetry al esta más enfocado en dependencias no ofrece la misma amplitud de automatización más allá de la gestión de las mismas.
- 
- - Projen destaca por su capacidad de automatización en proyectos grandes
+  - Poetry al esta más enfocado en dependencias no ofrece la misma amplitud de automatización más allá de la gestión de las mismas.
+  
+  - Projen destaca por su capacidad de automatización en proyectos grandes
 
 
 ## Tabla comparativa
